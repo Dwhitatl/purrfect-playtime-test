@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- BASE:START (managed by Coding Agent — do not edit) -->
+<base href="/purrfect-playtime-test/">
+<!-- BASE:END -->
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+
+<!-- SEO Meta Tags -->
+<title>Purrfect Playtime | Bright Cat Toys for Happy Play</title>
+<meta name="description" content="Shop colorful feather wands, laser pointers, and catnip mice from Purrfect Playtime—fun cat toys designed for zoomies, hunting, and pouncing." />
+<meta property="og:title" content="Purrfect Playtime | Bright Cat Toys for Happy Play" />
+<meta property="og:description" content="Shop colorful feather wands, laser pointers, and catnip mice from Purrfect Playtime—fun cat toys designed for zoomies, hunting, and pouncing." />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Purrfect Playtime | Bright Cat Toys for Happy Play" />
+<meta name="twitter:description" content="Shop colorful feather wands, laser pointers, and catnip mice from Purrfect Playtime—fun cat toys designed for zoomies, hunting, and pouncing." />
+<!-- End SEO Meta Tags -->
+
+<script data-gate>
+(function(){
+  var slug='6cLB9XWhXt';var apiBase='https://paymegpt.com';var currency='USD';var presets=[2500,5000,10000,25000];var minAmt=100;var maxAmt=1000000;var thankYouMsg='Thank you for your generous donation!';
+  function fmtD(c){return new Intl.NumberFormat('en-US',{style:'currency',currency:currency}).format(c/100);}
+  window.__processDonation=function(amountCents,email,donorName,donorMessage){
+    if(!amountCents||amountCents<minAmt){alert('Minimum donation is '+fmtD(minAmt));return Promise.reject('below_min');}
+    if(amountCents>maxAmt){alert('Maximum donation is '+fmtD(maxAmt));return Promise.reject('above_max');}
+    if(!email){alert('Please enter your email address.');return Promise.reject('no_email');}
+    var successBase=window.location.href.split('?')[0];
+    return fetch(apiBase+'/api/landing-pages/public/'+slug+'/donation/checkout',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({email:email,name:donorName||'',amountCents:amountCents,message:donorMessage||'',successUrl:successBase+'?donation=success&email='+encodeURIComponent(email)+'&session_id={CHECKOUT_SESSION_ID}',cancelUrl:successBase+'?donation=cancelled'})
+    }).then(function(r){return r.json();}).then(function(d){
+      if(d.checkoutUrl){window.location.href=d.checkoutUrl;}
+      else{alert(d.error||'Failed to process donation');throw new Error(d.error);}
+    });
+  };
+  window.__donationConfig={currency:currency,presets:presets,minAmount:minAmt,maxAmount:maxAmt,formatAmount:fmtD};
+  document.addEventListener('DOMContentLoaded',function(){
+    var urlParams=new URLSearchParams(window.location.search);
+    if(urlParams.get('donation')==='success'){
+      var overlay=document.createElement('div');overlay.id='donation-success-overlay';
+      overlay.style.cssText='position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:999999;font-family:system-ui,-apple-system,sans-serif;';
+      overlay.innerHTML='<div style="background:white;border-radius:16px;padding:40px;max-width:420px;width:90%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.15);"><div style="width:64px;height:64px;border-radius:50%;background:#dcfce7;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><h2 style="margin:0 0 12px;font-size:24px;font-weight:700;color:#111827;">'+thankYouMsg+'</h2><p style="margin:0 0 24px;color:#6b7280;font-size:16px;">Your donation has been processed successfully.</p><button onclick="this.closest(\'#donation-success-overlay\').remove();window.history.replaceState({},\'\',window.location.pathname);" style="padding:12px 32px;font-size:16px;font-weight:600;background:#16a34a;color:white;border:none;border-radius:8px;cursor:pointer;">Continue</button></div>';
+      document.body.appendChild(overlay);
+    }
+  });
+})();
+</script>
+<script data-field-replace>
+(function(){
+  var params=new URLSearchParams(window.location.search);
+  var fields={};
+  var paramMap={
+    'first_name':'firstName','last_name':'lastName','full_name':'fullName',
+    'email':'email','phone':'phone','company':'company',
+    'city':'city','state':'state','country':'country'
+  };
+  var skipTags={'SCRIPT':1,'STYLE':1,'NOSCRIPT':1,'TEXTAREA':1,'CODE':1,'PRE':1};
+  var hasUrlFields=false;
+  for(var p in paramMap){
+    var v=params.get(p);
+    if(v){fields[paramMap[p]]=v;hasUrlFields=true;}
+  }
+  var contactId=params.get('contact_id');
+  function esc(s){
+    if(!s)return s;
+    var d=document.createElement('div');
+    d.appendChild(document.createTextNode(s));
+    return d.innerHTML;
+  }
+  function doReplace(data){
+    var r={};
+    r['{{full_name}}']=esc(((data.firstName||'')+' '+(data.lastName||'')).trim()||((data.fullName||data.name)||''));
+    r['{{first_name}}']=esc(data.firstName||(data.name?data.name.split(' ')[0]:'')||'');
+    r['{{last_name}}']=esc(data.lastName||(data.name&&data.name.indexOf(' ')>-1?data.name.substring(data.name.indexOf(' ')+1):'')||'');
+    r['{{email}}']=esc(data.email||'');
+    r['{{phone}}']=esc(data.phone||'');
+    r['{{company}}']=esc(data.company||'');
+    r['{{city}}']=esc(data.city||'');
+    r['{{state}}']=esc(data.state||'');
+    r['{{country}}']=esc(data.country||'');
+    r['{{date}}']=new Date().toLocaleDateString();
+    r['{{time}}']=new Date().toLocaleTimeString();
+    r['{{location}}']=[data.city,data.state,data.country].filter(Boolean).join(', ');
+    r['{{tracking_id}}']=esc(data.trackingId||'');
+    r['{{lastClickedProduct}}']=esc(data.lastClickedProduct||'');
+    r['{{lastProductClickDate}}']=esc(data.lastProductClickDate||'');
+    r['{{lastClickedProductPrice}}']=esc(data.lastClickedProductPrice||'');
+    r['{{lastClickedProductURL}}']=esc(data.lastClickedProductURL||'');
+    r['{{productsClickedCount}}']=esc(data.productsClickedCount||'0');
+    r['{{ip_address}}']=esc(data.ipAddress||'');
+    r['{{ip}}']=esc(data.ipAddress||'');
+    if(data.customFields){
+      for(var k in data.customFields){
+        r['{{'+k+'}}']=esc(String(data.customFields[k]||''));
+      }
+    }
+    params.forEach(function(v,k){
+      if(!paramMap[k]&&k!=='contact_id'&&k!=='page_id'&&k.indexOf('utm_')!==0){
+        r['{{'+k+'}}']=esc(v);
+      }
+    });
+    var hasValues=false;
+    for(var key in r){if(r[key]){hasValues=true;break;}}
+    if(!hasValues)return;
+    var walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,{
+      acceptNode:function(n){
+        var p=n.parentNode;
+        if(p&&skipTags[p.nodeName])return NodeFilter.FILTER_REJECT;
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    });
+    var node;
+    while(node=walker.nextNode()){
+      var txt=node.nodeValue;
+      if(txt&&txt.indexOf('{{')>-1){
+        var changed=txt;
+        for(var ph in r){
+          if(r[ph]&&changed.indexOf(ph)>-1){
+            changed=changed.split(ph).join(r[ph]);
+          }
+        }
+        if(changed!==txt)node.nodeValue=changed;
+      }
+    }
+    var attrs=['value','placeholder','content','alt','title'];
+    attrs.forEach(function(attr){
+      var els=document.querySelectorAll('['+attr+'*="{{"]');
+      for(var i=0;i<els.length;i++){
+        var tag=els[i].tagName;
+        if(skipTags[tag])continue;
+        var val=els[i].getAttribute(attr);
+        if(val){
+          var nv=val;
+          for(var ph in r){
+            if(r[ph]&&nv.indexOf(ph)>-1){
+              nv=nv.split(ph).join(r[ph]);
+            }
+          }
+          if(nv!==val)els[i].setAttribute(attr,nv);
+        }
+      }
+    });
+  }
+  function run(){
+    if(contactId){
+      var xhr=new XMLHttpRequest();
+      xhr.open('GET','https://paymegpt.com/api/landing/context/'+encodeURIComponent(contactId)+'?page_id=3614');
+      xhr.onload=function(){
+        if(xhr.status===200){
+          try{
+            var resp=JSON.parse(xhr.responseText);
+            if(resp.success&&resp.contact){
+              var merged=resp.contact;
+              for(var k in fields){merged[k]=fields[k];}
+              doReplace(merged);
+              return;
+            }
+          }catch(e){}
+        }
+        if(hasUrlFields)doReplace(fields);
+      };
+      xhr.onerror=function(){if(hasUrlFields)doReplace(fields);};
+      xhr.send();
+    }else if(hasUrlFields){
+      doReplace(fields);
+    }
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',run);}
+  else{run();}
+})();
+</script>
+<script data-payment>
+(function(){
+  var slug='6cLB9XWhXt';
+  var apiBase='https://paymegpt.com';
+  function findEmail(){
+    var ids=['email','emailAddress','buyer-email','buyerEmail','user-email','userEmail','checkout-email','customer-email','contact-email'];
+    for(var i=0;i<ids.length;i++){var el=document.getElementById(ids[i]);if(el&&el.value&&el.value.includes('@'))return el.value.trim();}
+    var inputs=document.querySelectorAll('input[type="email"],input[name*="email"],input[placeholder*="email"],input[placeholder*="Email"]');
+    for(var j=0;j<inputs.length;j++){if(inputs[j].value&&inputs[j].value.includes('@'))return inputs[j].value.trim();}
+    return '';
+  }
+  function findName(){
+    var ids=['name','fullName','full-name','buyer-name','buyerName','customer-name','userName','user-name'];
+    for(var i=0;i<ids.length;i++){var el=document.getElementById(ids[i]);if(el&&el.value)return el.value.trim();}
+    var inputs=document.querySelectorAll('input[name*="name"]:not([name*="email"]):not([type="email"]),input[placeholder*="name"]:not([placeholder*="email"]):not([type="email"]),input[placeholder*="Name"]:not([type="email"])');
+    for(var j=0;j<inputs.length;j++){if(inputs[j].value)return inputs[j].value.trim();}
+    return '';
+  }
+  var __realProcessPayment=function(a,b,c,d,e){
+    var amountCents,email,productName,productDescription,customerName,quantity;
+    if(a&&typeof a==='object'){
+      amountCents=a.amountCents;email=a.email;productName=a.productName;
+      productDescription=a.productDescription||'';customerName=a.name||'';quantity=a.quantity||1;
+    }else{
+      amountCents=typeof a==='number'?a:0;productName=typeof b==='string'?b:'';
+      productDescription=typeof c==='string'?c:'';email='';customerName='';quantity=1;
+    }
+    if(!email)email=findEmail();
+    if(!customerName)customerName=findName();
+    if(!productName){alert('Product name is required.');return Promise.reject('no_product_name');}
+    if(!amountCents||amountCents<100){alert('Amount must be at least $1.00');return Promise.reject('invalid_amount');}
+    if(!email){alert('Please enter your email address.');return Promise.reject('no_email');}
+    var successBase=window.location.href.split('?')[0];
+    return fetch(apiBase+'/api/landing-pages/public/'+slug+'/payment/checkout',{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({email:email,name:customerName,amountCents:amountCents,productName:productName,productDescription:productDescription,quantity:quantity,successUrl:successBase+'?payment=success&product='+encodeURIComponent(productName)+'&session_id={CHECKOUT_SESSION_ID}',cancelUrl:successBase+'?payment=cancelled'})
+    }).then(function(r){return r.json();}).then(function(d){
+      if(d.checkoutUrl){window.location.href=d.checkoutUrl;}
+      else{alert(d.error||'Failed to process payment');throw new Error(d.error);}
+    });
+  };
+  Object.defineProperty(window,'__processPayment',{value:__realProcessPayment,writable:false,configurable:false});
+  document.addEventListener('DOMContentLoaded',function(){
+    var urlParams=new URLSearchParams(window.location.search);
+    if(urlParams.get('payment')==='success'){
+      var pName=urlParams.get('product')||'your item';
+      var overlay=document.createElement('div');overlay.id='payment-success-overlay';
+      overlay.style.cssText='position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:999999;font-family:system-ui,-apple-system,sans-serif;';
+      overlay.innerHTML='<div style="background:white;border-radius:16px;padding:40px;max-width:420px;width:90%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.15);"><div style="width:64px;height:64px;border-radius:50%;background:#dcfce7;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><h2 style="margin:0 0 12px;font-size:24px;font-weight:700;color:#111827;">Payment Successful!</h2><p style="margin:0 0 24px;color:#6b7280;font-size:16px;">Thank you for purchasing '+pName.replace(/</g,'&lt;').replace(/>/g,'&gt;')+'.</p><button onclick="document.getElementById(\'payment-success-overlay\').remove();window.history.replaceState({},\'\',window.location.pathname);" style="padding:12px 32px;font-size:16px;font-weight:600;background:#16a34a;color:white;border:none;border-radius:8px;cursor:pointer;">Continue</button></div>';
+      document.body.appendChild(overlay);
+    }
+  });
+})();
+</script></head>
+<body class="bg-gradient-to-br from-orange-100 via-white to-purple-100 text-slate-900">
+  <!-- ============================================================================ -->
+  <!-- HERO SECTION: Main landing area with headline, subtext, and primary CTA     -->
+  <!-- Mobile Padding: p-4 md:p-8 ensures text never touches viewport edges        -->
+  <!-- ============================================================================ -->
+  <header data-section="hero" class="px-4 py-6 md:px-8 lg:px-12">
+    <div class="mx-auto max-w-5xl rounded-3xl bg-gradient-to-r from-orange-500 to-purple-600 p-6 md:p-10 text-white shadow-xl">
+      <div class="grid gap-8 md:grid-cols-2 md:items-center">
+        <div>
+          <p class="mb-3 inline-flex rounded-full bg-white/20 px-3 py-1 text-sm font-semibold">Purrfect Playtime</p>
+          <h1 class="text-4xl font-black leading-tight md:text-6xl">Turn every pounce into playtime.</h1>
+          <p class="mt-4 max-w-xl text-base text-white/90 md:text-lg">Feather wands, laser pointers, and catnip mice made for zoomies, hunting practice, and happy naps after the fun.</p>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a href="#shop" class="rounded-full bg-white px-5 py-3 font-bold text-black">Shop Toys</a>
+            <a href="#checkout" class="rounded-full border border-white/40 px-5 py-3 font-bold text-white">Buy Now</a>
+          </div>
+        </div>
+        <div class="grid grid-cols-3 gap-3 text-black">
+          <div class="rounded-2xl bg-white p-4 text-center shadow"><div class="text-3xl">🪶</div><div class="mt-2 text-sm font-bold">Feather Wands</div></div>
+          <div class="rounded-2xl bg-white p-4 text-center shadow"><div class="text-3xl">🔴</div><div class="mt-2 text-sm font-bold">Laser Pointers</div></div>
+          <div class="rounded-2xl bg-white p-4 text-center shadow"><div class="text-3xl">🐭</div><div class="mt-2 text-sm font-bold">Catnip Mice</div></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================================================ -->
+  <!-- SHOP SECTION: Product highlights and payment buttons                         -->
+  <!-- ============================================================================ -->
+  <section id="shop" data-section="shop" class="px-4 py-6 md:px-8 lg:px-12">
+    <div class="mx-auto max-w-5xl">
+      <h2 class="text-2xl font-black text-purple-800 md:text-3xl">Pick your cat’s favorite</h2>
+      <div class="mt-5 grid gap-4 md:grid-cols-3">
+        <div class="rounded-2xl bg-white p-5 shadow ring-1 ring-orange-100">
+          <p class="text-2xl">🪶</p><h3 class="mt-2 text-xl font-bold">Feather Wands</h3><p class="mt-2 text-sm text-slate-600">Wiggle, chase, leap, repeat.</p><button class="buy-btn mt-4 w-full rounded-full bg-orange-500 px-4 py-3 font-bold text-white" data-name="Feather Wands" data-price="1499">Buy Now</button>
+        </div>
+        <div class="rounded-2xl bg-white p-5 shadow ring-1 ring-purple-100">
+          <p class="text-2xl">🔴</p><h3 class="mt-2 text-xl font-bold">Laser Pointers</h3><p class="mt-2 text-sm text-slate-600">Endless pursuit in a tiny beam.</p><button class="buy-btn mt-4 w-full rounded-full bg-purple-600 px-4 py-3 font-bold text-white" data-name="Laser Pointers" data-price="999">Buy Now</button>
+        </div>
+        <div class="rounded-2xl bg-white p-5 shadow ring-1 ring-orange-100">
+          <p class="text-2xl">🐭</p><h3 class="mt-2 text-xl font-bold">Catnip Mice</h3><p class="mt-2 text-sm text-slate-600">Kicks, carries, and cuddles.</p><button class="buy-btn mt-4 w-full rounded-full bg-orange-500 px-4 py-3 font-bold text-white" data-name="Catnip Mice" data-price="1299">Buy Now</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================================ -->
+  <!-- CHECKOUT SECTION: Simple purchase form with black text widget styling        -->
+  <!-- ============================================================================ -->
+  <section id="checkout" data-section="checkout" class="px-4 py-6 md:px-8 lg:px-12">
+    <div class="mx-auto max-w-5xl rounded-3xl bg-slate-900 p-6 text-white md:p-8">
+      <h2 class="text-2xl font-black md:text-3xl">Quick checkout</h2>
+      <p class="mt-2 text-white/80">Enter your details and tap buy. Perfect for a fast treat.</p>
+      <div class="mt-5 grid gap-3 md:grid-cols-3">
+        <input id="name" class="rounded-xl px-4 py-3 text-black" placeholder="Name (optional)" />
+        <input id="email" type="email" class="rounded-xl px-4 py-3 text-black" placeholder="Email" />
+        <select id="product" class="rounded-xl px-4 py-3 text-black">
+          <option value="Feather Wands" data-price="1499">Feather Wands — $14.99</option>
+          <option value="Laser Pointers" data-price="999">Laser Pointers — $9.99</option>
+          <option value="Catnip Mice" data-price="1299">Catnip Mice — $12.99</option>
+        </select>
+      </div>
+      <button id="checkoutBtn" class="mt-4 rounded-full bg-white px-6 py-3 font-black text-black">Buy Now</button>
+    </div>
+  </section>
+
+  
+  <script src="script.js"></script>
+</body>
+</html>
